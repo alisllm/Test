@@ -1,0 +1,16 @@
+C:\Users\Alina\source\repos\testovoe\testovoe\bin\Debug\testovoe.exe.config
+C:\Users\Alina\source\repos\testovoe\testovoe\bin\Debug\testovoe.exe
+C:\Users\Alina\source\repos\testovoe\testovoe\bin\Debug\testovoe.pdb
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\testovoe.csproj.AssemblyReference.cache
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\testovoe.csproj.SuggestedBindingRedirects.cache
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\MainWindow.g.cs
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\App.g.cs
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\testovoe_MarkupCompile.cache
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\testovoe_MarkupCompile.lref
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\MainWindow.baml
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\testovoe.g.resources
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\testovoe.Properties.Resources.resources
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\testovoe.csproj.GenerateResource.cache
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\testovoe.csproj.CoreCompileInputs.cache
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\testovoe.exe
+C:\Users\Alina\source\repos\testovoe\testovoe\obj\Debug\testovoe.pdb

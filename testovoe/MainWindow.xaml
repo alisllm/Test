@@ -1,0 +1,31 @@
+﻿<Window x:Class="testovoe.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:testovoe"
+        mc:Ignorable="d"
+       Title="MainWindow" Height="365" Width="871" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Background="#FFE5E5E5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Button x:Name="Platej" Content="Создать Платеж" HorizontalAlignment="Left" Margin="678,150,0,0" VerticalAlignment="Top" Height="40" Width="114" Click="Platej_Click" FontFamily="Segoe UI Semibold" BorderBrush="#FFB07171" Background="#FFC4BDBD"/>
+        <DockPanel LastChildFill="False" Margin="5,0,597,10" Height="311" VerticalAlignment="Bottom">
+            <Label Content="Приход денег" DockPanel.Dock="Top" Height="26"/>
+            <DataGrid x:Name="datagrid2" IsReadOnly="True" DockPanel.Dock="Top" Height="159" />
+            <ComboBox x:Name="combo" DockPanel.Dock="Bottom" Height="22" />
+            <Label Content="Выберите номер прихода денег" DockPanel.Dock="Bottom" Height="26"/>
+        </DockPanel>
+        <DockPanel LastChildFill="False" Margin="279,0,268,10" Height="311" VerticalAlignment="Bottom">
+            <Label Content="Заказы" DockPanel.Dock="Top" Height="26"/>
+            <DataGrid x:Name="datagrid" DockPanel.Dock="Top" Height="160" />
+            <ComboBox x:Name="combo_Zakaz" DockPanel.Dock="Bottom" Height="22"/>
+            <Label Content="Выберите номер заказа" DockPanel.Dock="Bottom" Height="26"/>
+        </DockPanel>
+
+    </Grid>
+</Window>
