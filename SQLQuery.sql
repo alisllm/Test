@@ -24,16 +24,47 @@ CREATE TABLE Zakaz(
 ) 
 
 --Триггер--
-CREATE TRIGGER Platej_INSERT
+CREATE TRIGGER Platej_INSERT2
 ON platej2
 After INSERT
 AS 
-UPDATE Zakaz
-SET SummaOplat = SummaOplat+ SummaPlatej from Platej2 
-where Id = (SELECT Zakaz_id FROM inserted)
+declare @ostatokS money;
+declare @summS money;
+declare @summaOplat money;
+select @ostatokS = ostatok FROM Prihod_Deneg WHERE Id = (SELECT Prihod_id FROM inserted);
+select @summS = Summa FROM Zakaz WHERE Id = (SELECT Zakaz_id FROM inserted);
+select @summaOplat = SummaOplat FROM Zakaz WHERE Id = (SELECT Zakaz_id FROM inserted);
+---Равно
+if ((@summS-@summaOplat) = @ostatokS)
+begin
+update Platej2
+set SummaPlatej = @ostatokS where SummaPlatej =0
+update Zakaz
+set SummaOplat = SummaOplat + @ostatokS where id = (SELECT Zakaz_id FROM inserted);
 update Prihod_Deneg
-set Ostatok = Ostatok - SummaPlatej from Platej2 
-where Id = (SELECT Prihod_id FROM inserted)
+set Ostatok = 0 where Id = (SELECT Prihod_id FROM inserted);
+end;
+---БОЛЬШЕ
+if ((@summS-@summaOplat) < @ostatokS)
+begin
+update Platej2
+set SummaPlatej = (@summS-@summaOplat) where SummaPlatej =0
+update Zakaz
+set SummaOplat = Summa where id = (SELECT Zakaz_id FROM inserted);
+update Prihod_Deneg
+set Ostatok = (@ostatokS - (@summS-@summaOplat)) where Id = (SELECT Prihod_id FROM inserted);
+end;
+---МЕНЬШЕ
+if ((@summS-@summaOplat) > @ostatokS)
+begin
+update Platej2
+set SummaPlatej = @ostatokS where SummaPlatej =0
+update Zakaz
+set SummaOplat = @summaOplat+@ostatokS where id = (SELECT Zakaz_id FROM inserted);
+update Prihod_Deneg
+set Ostatok = 0 where Id = (SELECT Prihod_id FROM inserted);
+end;
+
 --Добавление в бд--
 insert into Zakaz(Summa,SummaOplat) values (5025,259), (1000,0),(1000,100),(1500,300)
 insert into Prihod_Deneg(Summa,Ostatok) values (5000,2199),(45000,38450),(5000,5000)
