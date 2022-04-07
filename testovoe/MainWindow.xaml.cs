@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Data.SqlClient;
+using System.Linq;
 using testovoe.DataSet1TableAdapters;
+using System.Collections.Generic;
+using System.Data.Linq;
 
 namespace testovoe
 {
@@ -19,42 +22,39 @@ namespace testovoe
         {
             InitializeComponent();
             ObnovaDatagrid();
-            SqlConnection connection = new SqlConnection(s);
-            connection.Open();
-            ////
-            ///Выгрузка в комбобокс 
-            string Sql = "select Id from Prihod_Deneg";
-            SqlCommand cmd = new SqlCommand(Sql, connection);
-            SqlDataReader DR = cmd.ExecuteReader();
-            while (DR.Read())
-            {
-                combo.Items.Add(DR[0]);
-            }
-            cmd.Dispose();
-            DR.Close();
-
-            ////
-            ///Выгрузка в комбобокс 2
-            string Sql2 = "select Id from Zakaz";
-            SqlCommand cmd2 = new SqlCommand(Sql2, connection);
-            SqlDataReader DR2 = cmd2.ExecuteReader();
-
-            while (DR2.Read())
-            {
-                combo_Zakaz.Items.Add(DR2[0]);
-
-            }
-            cmd2.Dispose();
-            DR2.Close();
-            connection.Close();
         }
         public void ObnovaDatagrid()
         {
+            ////
+            ///ОБНОВЛЕНИЕ ДАТАГРИДОВ
+            ///
             zakazTableadapter = new ZakazTableAdapter();
             prihodTableadapter = new Prihod_DenegTableAdapter();
 
             datagrid.ItemsSource = zakazTableadapter.GetData();
             datagrid2.ItemsSource = prihodTableadapter.GetData();
+
+            DataContext db = new DataContext(s);
+            Table<Zakaz> zakaz = db.GetTable<Zakaz>();
+            Table<Prihod_Deneg> Prihod_Deneg = db.GetTable<Prihod_Deneg>();
+            ////
+            ///СОРТИРОВКА ОПЛАЧЕННЫЗ ЗАКАЗОВ
+            ///
+            var id_Zakaza = from u in zakaz
+                            where u.Summa != u.SummaOplat
+                            select u.Id;
+
+            combo_Zakaz.ItemsSource = id_Zakaza;
+
+            ////
+            ///СОРТИРОВКА ИЗРАСХОДОВАННЫХ ПРИХОДОВ
+            ///
+            var id_Prihoda = from u in Prihod_Deneg
+                             where u.Ostatok != 0
+                             select u.Id;
+
+            combo.ItemsSource = id_Prihoda;
+
         }
 
         /// <summary>
@@ -78,4 +78,5 @@ namespace testovoe
 
         }
     }
+   
 }

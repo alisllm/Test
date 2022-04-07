@@ -28,9 +28,9 @@ namespace testovoe.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-8SU3AO0\\SQLEXPRESS;Initial Catalog=Test2;Integrated Security=" +
             "True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False")]
-        public string Test2ConnectionString {
+        public string DefaultConnection {
             get {
-                return ((string)(this["Test2ConnectionString"]));
+                return ((string)(this["DefaultConnection"]));
             }
         }
     }
