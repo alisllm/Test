@@ -63,14 +63,27 @@ namespace testovoe
         /// </summary>
         private void Platej_Click(object sender, RoutedEventArgs e)
         {
+
             tableDataset = new DataSet1();
             if (combo.SelectedItem != null && combo_Zakaz.SelectedItem != null)
             {
-                platejTableadapter = new Platej2TableAdapter();
-                platejTableadapter.InsertQuery(Convert.ToInt32(combo_Zakaz.Text), Convert.ToInt32(combo.Text));
-                platejTableadapter.Fill(tableDataset.Platej2);
+                zakazTableadapter = new ZakazTableAdapter();
 
-                ObnovaDatagrid();
+                var returnValue = zakazTableadapter.ScalarQuery(Convert.ToInt32(combo_Zakaz.Text));
+
+                if (Convert.ToDouble(returnValue)>0)
+                {
+                    platejTableadapter = new Platej2TableAdapter();
+                    platejTableadapter.InsertQuery(Convert.ToInt32(combo_Zakaz.Text), Convert.ToInt32(combo.Text));
+                    platejTableadapter.Fill(tableDataset.Platej2);
+
+                    ObnovaDatagrid();
+                }
+                else
+                {
+                    MessageBox.Show("Заказ уже был оплачен ");
+                    ObnovaDatagrid();
+                }                
             }
             else
             {
@@ -78,6 +91,7 @@ namespace testovoe
             }
 
         }
+
     }
    
 }
