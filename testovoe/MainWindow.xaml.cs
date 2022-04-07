@@ -5,6 +5,7 @@ using System.Linq;
 using testovoe.DataSet1TableAdapters;
 using System.Collections.Generic;
 using System.Data.Linq;
+using testovoe.Properties;
 
 namespace testovoe
 {
@@ -17,7 +18,7 @@ namespace testovoe
         Platej2TableAdapter platejTableadapter;
         Prihod_DenegTableAdapter prihodTableadapter;
         ZakazTableAdapter zakazTableadapter;
-        string s = @"Data Source = DESKTOP-8SU3AO0\SQLEXPRESS;Integrated Security = true;Initial Catalog=Test2";
+      
         public MainWindow()
         {
             InitializeComponent();
@@ -34,7 +35,7 @@ namespace testovoe
             datagrid.ItemsSource = zakazTableadapter.GetData();
             datagrid2.ItemsSource = prihodTableadapter.GetData();
 
-            DataContext db = new DataContext(s);
+            DataContext db = new DataContext(Settings.Default.DefaultConnection);
             Table<Zakaz> zakaz = db.GetTable<Zakaz>();
             Table<Prihod_Deneg> Prihod_Deneg = db.GetTable<Prihod_Deneg>();
             ////
